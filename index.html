@@ -134,39 +134,89 @@
             </div>
 
             <!-- 4. تبويب قواعد البيانات -->
+                        <!-- 4. تبويب قواعد البيانات -->
             <div id="pharmacySub4" class="sub-sub-content pharmacy-group">
                 <h3>👥 قواعد البيانات</h3>
                 <p>إدارة بيانات الموظفين، الموردين، والأنواع.</p>
 
-                <!-- حاوية الثلاثة جداول جنب بعض -->
-                <div style="display: flex; gap: 15px; align-items: flex-start; overflow-x: auto; margin-top: 15px;">
+                <!-- 1. جدول الموظفين (فوق لوحده) -->
+                <div style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 8px; color: #333;">الموظفين</h4>
+                    <table class="pharmacy-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>اسم الموظف</th>
+                                <th>الوظيفة</th>
+                                <th>الحضور</th>
+                                <th>الانصراف</th>
+                                <th>أول يوم</th>
+                                <th>آخر يوم</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>أحمد محمد</td>
+                                <td>مساعد صيدلي</td>
+                                <td>08:00 ص</td>
+                                <td>04:00 م</td>
+                                <td>01/07/2026</td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- فاصل عشان نضمن النزول للسطر اللي تحت -->
+                <div style="clear: both; width: 100%;"></div>
+
+                <!-- 2. جدول الموردين والبيان (تحت جنب بعض) -->
+                <div style="display: flex; gap: 15px; width: 100%; align-items: flex-start; overflow-x: auto;">
                     
-                    <!-- 1. جدول الموظفين -->
-                    <div style="flex: 1; min-width: 280px;">
-                        <h4 style="margin-bottom: 8px; color: #333;">الموظفين</h4>
-                        <table class="pharmacy-table">
+                    <!-- جدول الموردين -->
+                    <div style="flex: 1; min-width: 220px;">
+                        <h4 style="margin-bottom: 8px; color: #333;">الموردين</h4>
+                        <table class="pharmacy-table" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>اسم الموظف</th>
-                                    <th>الوظيفة</th>
-                                    <th>الحضور</th>
-                                    <th>الانصراف</th>
-                                    <th>أول يوم</th>
-                                    <th>آخر يوم</th>
+                                    <th>اسم المورد</th>
+                                    <th>البيان</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>أحمد محمد</td>
-                                    <td>مساعد صيدلي</td>
-                                    <td>08:00 ص</td>
-                                    <td>04:00 م</td>
-                                    <td>01/07/2026</td>
-                                    <td>—</td>
+                                    <td>شركة المتحدة</td>
+                                    <td>أدوية ومستلزمات</td>
+                                </tr>
+                                <tr>
+                                    <td>شركة الفيروز</td>
+                                    <td>أدوية بشرية</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- جدول البيان -->
+                    <div style="flex: 1; min-width: 180px;">
+                        <h4 style="margin-bottom: 8px; color: #333;">البيان</h4>
+                        <table class="pharmacy-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>أنواع المعاملات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>فاتورة</td></tr>
+                                <tr><td>مرتجع</td></tr>
+                                <tr><td>مشتريات</td></tr>
+                                <tr><td>مردود</td></tr>
+                                <tr><td>مبيعات</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
 
                     <!-- 2. جدول الموردين -->
                     <div style="flex: 1; min-width: 220px;">
