@@ -1,22 +1,19 @@
-<!DOCTYPE html> <!-- بيعرف المتصفح إن دي أحدث نسخة من الهيكل -->
-<html lang="ar" dir="rtl"> <!-- تحديد لغة الصفحة عربي واتجاه الكتابة من اليمين للشمال -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8"> <!-- تشفير الحروف عشان العربي يظهر سليماً بدون رموز غريبة -->
-    <title>إدارة الصيدلية</title> <!-- اسم الصفحة اللي بيظهر فوق في المتصفح -->
-    <link rel="stylesheet" href="style.css"> <!-- ربط ملف التصميم والشكل الخارجي -->
+    <meta charset="UTF-8">
+    <title>إدارة الصيدلية</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- الصندوق الرئيسي اللي شايل التطبيق كله في نص الشاشة -->
     <div class="app-container">
 
         <!-- ================= التبويبات الرئيسية ================= -->
         <div class="tabs-header">
-            <!-- زرار الصيدلية الرئيسي (نشط افتراضياً) -->
             <button class="tab-btn active" onclick="openTab(event, 'pharmacyTab')">صيدلية 💊</button>
-            <!-- زرار الخاص الرئيسي -->
             <button class="tab-btn" onclick="openTab(event, 'privateTab')">الخاص 🔒</button>
         </div>
 
@@ -35,8 +32,7 @@
                     البيانات</button>
             </div>
 
-            <!-- 1. تبويب المصروفات (جواه الجدول المنظم) -->
-            <!-- 1. تبويب اليومية (الجدول الاحترافي الجديد) -->
+            <!-- 1. تبويب اليومية (جواه جدول الشิفتات + جدولين إنستا وفودافون) -->
             <div id="pharmacySub1" class="sub-sub-content pharmacy-group active-sub">
                 <h3>📋 سجل اليومية - الشิفتات</h3>
                 <p>متابعة حركة الشิفتات والموردين اليومية.</p>
@@ -75,63 +71,60 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- جدولين إنستا وفودافون كاش (بقوا جوا تبويب اليومية بس) -->
+                <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 15px;">
+                    <!-- الجدول الأول: إنستا -->
+                    <table class="pharmacy-table">
+                        <thead>
+                            <tr>
+                                <th colspan="3">إنستا</th>
+                            </tr>
+                            <tr>
+                                <th>سيستم</th>
+                                <th>فعلي</th>
+                                <th>الفرق</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- الجدول الثاني: فودافون كاش -->
+                    <table class="pharmacy-table">
+                        <thead>
+                            <tr>
+                                <th colspan="3">فودافون كاش</th>
+                            </tr>
+                            <tr>
+                                <th>سيستم</th>
+                                <th>فعلي</th>
+                                <th>الفرق</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-         <!-- حط السطر ده في الحتة اللي عايز تظهر فيها الجدولين -->
 
-    <!-- الجدولين بتوع إنستا وفودافون كاش منسقين وزي الفل -->
-<div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 15px;">
-
-    <!-- الجدول الأول: إنستا -->
-    <table class="pharmacy-table">
-        <thead>
-            <tr>
-                <th colspan="3">إنستا</th>
-            </tr>
-            <tr>
-                <th>سيستم</th>
-                <th>فعلي</th>
-                <th>الفرق</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- الجدول الثاني: فودافون كاش -->
-    <table class="pharmacy-table">
-        <thead>
-            <tr>
-                <th colspan="3">فودافون كاش</th>
-            </tr>
-            <tr>
-                <th>سيستم</th>
-                <th>فعلي</th>
-                <th>الفرق</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
-
-
-            <!-- 2. تبويب المشتريات (الجدول الاحترافي الجديد في سطر واحد) -->
+            <!-- 2. تبويب المشتريات (جواه جدول المشتريات + جدول إجمالي المشتريات يومي) -->
             <div id="pharmacySub2" class="sub-sub-content pharmacy-group">
                 <h3>📦 سجل المشتريات والمرتجعات</h3>
                 <p>متابعة الفواتير والمرتجعات والموردين.</p>
 
-                <!-- جدول المشتريات بالترتيب الجديد -->
+                <!-- جدول المشتريات -->
                 <table class="pharmacy-table">
                     <thead>
                         <tr>
@@ -156,13 +149,12 @@
                             <td>مرتجع</td>
                             <td>1500 ج.م</td>
                             <td>تم الاستلام كاملة</td>
+                        </tr>
                     </tbody>
                 </table>
-            </div>
-            <!-- فاصل صغير أو عنوان للجدول الجديد -->
-                <h3 style="margin-top: 25px;">📊 إجمالي المشتريات يومي</h3>
 
-                <!-- جدول إجمالي المشتريات يومي (في صف واحد) -->
+                <!-- جدول إجمالي المشتريات يومي (بقي جوه تبويب المشتريات بس) -->
+                <h3 style="margin-top: 25px;">📊 إجمالي المشتريات يومي</h3>
                 <table class="pharmacy-table" style="margin-top: 10px;">
                     <thead>
                         <tr>
@@ -187,60 +179,50 @@
                         </tr>
                     </tbody>
                 </table>
-        </div>
-            <div id="pharmacySub2" class="sub-sub-content pharmacy-group">
-                <h3>📦 الديون</h3>
-                <p>محتوى الديون هنا.</p>
+
             </div>
 
+            <!-- تبويب الاجمالي -->
             <div id="pharmacySub3" class="sub-sub-content pharmacy-group">
-                <h3>💰 الحضور والانصراف</h3>
-                <p>محتوى الحضور والانصراف هنا.</p>
+                <h3>💰 الإجمالي</h3>
+                <p>محتوى الإجمالي هنا.</p>
             </div>
 
+            <!-- تبويب قواعد البيانات -->
             <div id="pharmacySub4" class="sub-sub-content pharmacy-group">
-                <h3>👥 ملاحظاتي</h3>
-                <p> ملاحظاتي </p>
+                <h3>👥 قواعد البيانات</h3>
+                <p>محتوى قواعد البيانات هنا.</p>
             </div>
 
         </div>
 
         <!-- ================= محتوى التبويب الخاص الرئيسي ================= -->
         <div id="privateTab" class="tab-content">
-
-            <!-- شريط التبويبات الفرعية للخاص -->
             <div class="sub-tabs-header">
                 <button class="sub-tab-btn active"
                     onclick="openSubTab(event, 'privateSub1', 'private-group')">المصريف</button>
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'privateSub2', 'private-group')">الديون</button>
-                <button class="sub-tab-btn" onclick="openSubTab(event, 'privateSub3', 'private-group')">الحضور
-                    والانصراف</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'privateSub3', 'private-group')">الحضور والانصراف</button>
                 <button class="sub-tab-btn"
                     onclick="openSubTab(event, 'privateSub4', 'private-group')">ملاحظاتي</button>
             </div>
 
-            <!-- الصناديق الفرعية الخاصة بالخاص -->
             <div id="privateSub1" class="sub-sub-content private-group active-sub">
                 <h3>🔒 محتوى الخاص الأول</h3>
             </div>
-
             <div id="privateSub2" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الخاص الثاني</h3>
             </div>
-
             <div id="privateSub3" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الخاص الثالث</h3>
             </div>
-
             <div id="privateSub4" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الخاص الرابع</h3>
             </div>
-
         </div>
 
     </div>
 
-    <!-- ربط ملف الجافاسكريبت البرمجي -->
     <script src="script.js"></script>
 </body>
 
