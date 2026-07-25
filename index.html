@@ -30,8 +30,8 @@
 
             <!-- 1. تبويب اليومية -->
             <div id="pharmacySub1" class="sub-sub-content pharmacy-group active-sub">
-                <h3>📋 سجل اليومية - الشิفتات</h3>
-                <p>متابعة حركة الشิفتات والموردين اليومية.</p>
+                <h3>📋 سجل اليومية - الشفتات</h3>
+                <p>متابعة حركة الشفتات والموردين اليومية.</p>
 
                 <table class="pharmacy-table">
                     <thead>
@@ -111,7 +111,7 @@
             <!-- 3. تبويب الاجمالي -->
             <div id="pharmacySub3" class="sub-sub-content pharmacy-group">
                 <h3>💰 تقرير الإجمالي اليومي</h3>
-                <p>متابعة إجماليات اليوم بناءً على حركة الشิفتات والخدمات.</p>
+                <p>متابعة إجماليات اليوم بناءً على حركة الشفتات والخدمات.</p>
 
                 <table class="pharmacy-table" style="margin-top: 15px;">
                     <thead>
@@ -133,16 +133,15 @@
                 </table>
             </div>
 
-            <!-- 4. تبويب قواعد البيانات -->
-                        <!-- 4. تبويب قواعد البيانات -->
+            <!-- 4. تبويب قواعد البيانات (مغلق صح جوه الـ div الخاص بيه) -->
             <div id="pharmacySub4" class="sub-sub-content pharmacy-group">
                 <h3>👥 قواعد البيانات</h3>
                 <p>إدارة بيانات الموظفين، الموردين، والأنواع.</p>
 
-                <!-- 1. جدول الموظفين (فوق لوحده) -->
-                <div style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                <!-- جدول الموظفين (فوق لوحده) -->
+                <div style="margin-top: 15px; margin-bottom: 20px;">
                     <h4 style="margin-bottom: 8px; color: #333;">الموظفين</h4>
-                    <table class="pharmacy-table" style="width: 100%;">
+                    <table class="pharmacy-table">
                         <thead>
                             <tr>
                                 <th>اسم الموظف</th>
@@ -166,59 +165,10 @@
                     </table>
                 </div>
 
-                <!-- فاصل عشان نضمن النزول للسطر اللي تحت -->
-                <div style="clear: both; width: 100%;"></div>
-
-                <!-- 2. جدول الموردين والبيان (تحت جنب بعض) -->
-                <div style="display: flex; gap: 15px; width: 100%; align-items: flex-start; overflow-x: auto;">
+                <!-- جدول الموردين وجدول البيان (تحت جنب بعض) -->
+                <div style="display: flex; gap: 15px; align-items: flex-start; overflow-x: auto;">
                     
                     <!-- جدول الموردين -->
-                    <div style="flex: 1; min-width: 220px;">
-                        <h4 style="margin-bottom: 8px; color: #333;">الموردين</h4>
-                        <table class="pharmacy-table" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>اسم المورد</th>
-                                    <th>البيان</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>شركة المتحدة</td>
-                                    <td>أدوية ومستلزمات</td>
-                                </tr>
-                                <tr>
-                                    <td>شركة الفيروز</td>
-                                    <td>أدوية بشرية</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- جدول البيان -->
-                    <div style="flex: 1; min-width: 180px;">
-                        <h4 style="margin-bottom: 8px; color: #333;">البيان</h4>
-                        <table class="pharmacy-table" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>أنواع المعاملات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>فاتورة</td></tr>
-                                <tr><td>مرتجع</td></tr>
-                                <tr><td>مشتريات</td></tr>
-                                <tr><td>مردود</td></tr>
-                                <tr><td>مبيعات</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-
-                    <!-- 2. جدول الموردين -->
                     <div style="flex: 1; min-width: 220px;">
                         <h4 style="margin-bottom: 8px; color: #333;">الموردين</h4>
                         <table class="pharmacy-table">
@@ -241,7 +191,7 @@
                         </table>
                     </div>
 
-                    <!-- 3. جدول البيان -->
+                    <!-- جدول البيان -->
                     <div style="flex: 1; min-width: 180px;">
                         <h4 style="margin-bottom: 8px; color: #333;">البيان</h4>
                         <table class="pharmacy-table">
