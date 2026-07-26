@@ -30,7 +30,14 @@
 
             <!-- 1. تبويب اليومية -->
             <div id="pharmacySub1" class="sub-sub-content pharmacy-group active-sub">
-                <h3>📋 سجل اليومية </h3>
+                <h3>📋 سجل اليومية</h3>
+                
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
+
                 <table class="pharmacy-table">
                     <thead>
                         <tr>
@@ -84,6 +91,12 @@
                 <h3>📦 سجل المشتريات والمرتجعات</h3>
                 <p>متابعة الفواتير والمرتجعات والموردين.</p>
 
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
+
                 <table class="pharmacy-table">
                     <thead>
                         <tr>
@@ -111,6 +124,12 @@
                 <h3>💰 تقرير الإجمالي اليومي</h3>
                 <p>متابعة إجماليات اليوم بناءً على حركة الشفتات والخدمات.</p>
 
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
+
                 <table class="pharmacy-table" style="margin-top: 15px;">
                     <thead>
                         <tr>
@@ -131,12 +150,18 @@
                 </table>
             </div>
 
-            <!-- 4. تبويب قواعد البيانات (مغلق صح جوه الـ div الخاص بيه) -->
+            <!-- 4. تبويب قواعد البيانات -->
             <div id="pharmacySub4" class="sub-sub-content pharmacy-group">
                 <h3>👥 قواعد البيانات</h3>
                 <p>إدارة بيانات الموظفين، الموردين، والأنواع.</p>
 
-                <!-- جدول الموظفين (فوق لوحده) -->
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
+
+                <!-- جدول الموظفين -->
                 <div style="margin-top: 15px; margin-bottom: 20px;">
                     <h4 style="margin-bottom: 8px; color: #333;">الموظفين</h4>
                     <table class="pharmacy-table">
@@ -163,10 +188,8 @@
                     </table>
                 </div>
 
-                <!-- جدول الموردين وجدول البيان (تحت جنب بعض) -->
+                <!-- جدول الموردين وجدول البيان -->
                 <div style="display: flex; gap: 15px; align-items: flex-start; overflow-x: auto;">
-                    
-                    <!-- جدول الموردين -->
                     <div style="flex: 1; min-width: 220px;">
                         <h4 style="margin-bottom: 8px; color: #333;">الموردين</h4>
                         <table class="pharmacy-table">
@@ -189,7 +212,6 @@
                         </table>
                     </div>
 
-                    <!-- جدول البيان -->
                     <div style="flex: 1; min-width: 180px;">
                         <h4 style="margin-bottom: 8px; color: #333;">البيان</h4>
                         <table class="pharmacy-table">
@@ -207,7 +229,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
 
@@ -224,25 +245,31 @@
 
             <div id="privateSub1" class="sub-sub-content private-group active-sub">
                 <h3>🔒 محتوى المصاريف</h3>
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
             </div>
+
             <div id="privateSub2" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الديون</h3>
-            </div>
-                        <!-- 3. تبويب الحضور والانصراف (الخاص) -->
-            <div id="privateSub3" class="sub-sub-content private-group">
-         <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
-    <span id="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
-    <button onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
-    <button onclick="resetPageData()" style="padding: 3px 8px; font-size: 11px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">إعادة تهيئة</button>
-</div>
-
-    
-
-                <!-- شريط الأدوات الصغير جداً (حفظ، تهيئة، ربط) -->
+                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
-                    <span id="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
-                    <button onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
-                    <button onclick="resetPageData()" style="padding: 3px 8px; font-size: 11px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">إعادة تهيئة</button>
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
+            </div>
+
+            <!-- 3. تبويب الحضور والانصراف (الخاص) -->
+            <div id="privateSub3" class="sub-sub-content private-group">
+                <h3>🔒 سجل الحضور والانصراف الشهري</h3>
+                <p>متابعة أيام الشهر، أوقات الحضور والانصراف، وحساب الساعات تلقائياً.</p>
+
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
                 </div>
 
                 <table class="pharmacy-table">
@@ -252,6 +279,7 @@
                             <th>حضور (اكتب 7 أو 19)</th>
                             <th>انصراف (اكتب 7 أو 19)</th>
                             <th>إجمالي الساعات</th>
+                            <th>إجراء</th>
                         </tr>
                     </thead>
                     <tbody id="attendanceTableBody">
@@ -260,10 +288,13 @@
                 </table>
             </div>
 
-
-            </div>
             <div id="privateSub4" class="sub-sub-content private-group">
                 <h3>🔒 محتوى ملاحظاتي</h3>
+                <!-- شريط الأدوات الصغير -->
+                <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
+                    <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
+                    <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
+                </div>
             </div>
         </div>
 
