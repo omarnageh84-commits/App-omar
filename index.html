@@ -230,8 +230,29 @@
             <div id="privateSub2" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الديون</h3>
             </div>
+                        <!-- 3. تبويب الحضور والانصراف (الخاص) -->
             <div id="privateSub3" class="sub-sub-content private-group">
-                <h3>🔒 محتوى الحضور والانصراف</h3>
+                <h3>🔒 سجل الحضور والانصراف الشهري</h3>
+                <p>متابعة أيام الشهر، أوقات الحضور والانصراف، وحساب الساعات تلقائياً.</p>
+
+                <!-- زرار وعرض الشهر الحالي -->
+                <div style="margin: 10px 0; font-weight: bold; color: #333;" id="currentMonthYear"></div>
+
+                <table class="pharmacy-table">
+                    <thead>
+                        <tr>
+                            <th>اليوم / التاريخ</th>
+                            <th>حضور (اكتب 7 أو 19)</th>
+                            <th>انصراف (اكتب 7 أو 19)</th>
+                            <th>إجمالي الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- هيتم تعبئة الأيام تلقائياً عن طريق الجافاسكريبت -->
+                    </tbody>
+                </table>
+            </div>
+
             </div>
             <div id="privateSub4" class="sub-sub-content private-group">
                 <h3>🔒 محتوى ملاحظاتي</h3>
