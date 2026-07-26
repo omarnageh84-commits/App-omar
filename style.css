@@ -1,172 +1,21 @@
-/* (القديم) التنسيق العام للصفحة وتكبير الخط زي ما طلبْت */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    /* خلفية رمادية فاتحة هادية للعين */
-    margin: 0;
-    padding: 20px;
-    direction: rtl;
-    font-size: 18px;
-    /* تكبير الخط العام */
-}
-
-/* (القديم) صندوق الحاوية الرئيسي */
-.app-container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-}
-
-/* (القديم) شريط التبويبات الرئيسية */
-.tabs-header {
-    display: flex;
-    background-color: #cbd5e1;
-    border-bottom: 2px solid #94a3b8;
-}
-
-/* (القديم) تصميم أزرار التبويبات الرئيسية وتكبير خطها */
-.tab-btn {
-    flex: 1;
-    padding: 18px;
-    border: none;
-    background: transparent;
-    font-size: 20px;
-    /* خط كبير وواضح للزرار */
-    font-weight: bold;
-    color: #334155;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tab-btn:hover {
-    background-color: #94a3b8;
-}
-
-/* (القديم) لون التبويب الرئيسي النشط (أخضر صيدلي) */
-.tab-btn.active {
-    background-color: #16a34a;
-    color: #ffffff;
-}
-
-/* (القديم) صناديق المحتوى الرئيسية */
-.tab-content {
-    display: none;
-    padding: 20px;
-}
-
-.tab-content.active-content {
-    display: block;
-}
-
-
-/* ================= 🚨 [تحديث جديد] تنسيقات التبويبات الفرعية ================= */
-
-/* شريط الأزرار الفرعية (ليه عملناه؟ عشان يلم الأربَع أزرار بشكل شيك ومنظم بلون خلفية خفيف) */
-.sub-tabs-header {
-    display: flex;
-    gap: 10px;
-    /* مسافة مريحة بين الأزرار وبعضها */
-    background-color: #f1f5f9;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-}
-
-/* تصميم الأزرار الفرعية نفسها (ليه عملناه؟ عشان يكون حجمها مناسب وصغير ومميز عن الرئيسية) */
-.sub-tab-btn {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    color: #475569;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sub-tab-btn:hover {
-    background-color: #e2e8f0;
-}
-
-/* لون الزرار الفرعي لما يدوس عليه المستخدم (ليه عملناه؟ عشان ياخد لون أزرق مميز يوضح هو واقف فين) */
-.sub-tab-btn.active {
-    background-color: #0284c7;
-    color: #ffffff;
-    border-color: #0284c7;
-}
-
-/* صناديق المحتوى الفرعي (ليه عملناه؟ عشان تدي خلفية وإطار مرتب جوه التبويب الرئيسي) */
-.sub-sub-content {
-    display: none;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 6px;
-    border: 1px solid #e2e8f0;
-    color: #1e293b;
-    font-size: 18px;
-}
-
-/* إظهار الصندوق الفرعي النشط حالياً */
-.sub-sub-content.active-sub {
-    display: block;
-}
-
-/* ================= تنسيق الجداول الاحترافية ================= */
-.pharmacy-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* دمج الحدود عشان ميبقاش فيه فراغات */
-    margin-top: 15px;
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    border: 1px solid #cbd5e1;
-    /* حد خارجي شيك للجدول */
-}
-
-/* تنسيق رؤوس الجدول (العناوين) */
-.pharmacy-table th {
-    background-color: #16a34a;
-    /* أخضر صيدلي مميز */
-    color: #ffffff;
-    padding: 12px 10px;
-    text-align: center;
-    /* محاذاة في النص عشان الترتيب */
-    font-size: 16px;
-    border-left: 1px solid #15803d;
-    /* حدود فاصلة بين الأعمدة في الهيدر */
-}
-
-/* تنسيق خلايا البيانات */
-.pharmacy-table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #e2e8f0;
-    /* خط فاصل أفقي ناعم بين الصفوف */
-    border-left: 1px solid #e2e8f0;
-    /* خط فاصل رأسي بين الأعمدة */
-    color: #334155;
-    font-size: 15px;
-    text-align: center;
-}
-
-/* إلغاء الخط الرأسي الأخير عشان الشكل يبقى مظبوط */
-.pharmacy-table th:first-child,
-.pharmacy-table td:first-child {
-    border-left: none;
-}
-
-/* لون خفيف لما تقف بالماوس على الصف */
-.pharmacy-table tbody tr:hover {
-    background-color: #f1f5f9;
-}
-
-/* تمييز صفوف تبادلية لخلفية أريح للعين (اختياري) */
-.pharmacy-table tbody tr:nth-child(even) {
-    background-color: #f8fafc;
-}
+:root{--green:#0e9f6e;--green-dark:#057a55;--bg:#f8fafc;--card:#ffffff;--border:#e2e8f0;--text:#1e293b}
+*{box-sizing:border-box;font-family:'Cairo','Segoe UI',Tahoma,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);direction:rtl}
+.app-container{max-width:1250px;margin:auto;padding:12px}
+.tabs-header{display:flex;gap:12px;background:var(--card);padding:12px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:16px;position:sticky;top:10px;z-index:99}
+.tab-btn{flex:1;padding:14px;border:none;border-radius:10px;font-weight:800;font-size:15px;cursor:pointer;background:#f1f5f9;transition:0.2s}
+.tab-btn.active{background:var(--green);color:white;box-shadow:0 4px 10px rgba(14,159,110,0.3)}
+.tab-content{display:none;animation:fade 0.3s} .tab-content.active-content{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.sub-tabs-header{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.sub-tab-btn{padding:8px 16px;border:1px solid var(--border);border-radius:20px;background:white;cursor:pointer;font-weight:700;font-size:13px}
+.sub-tab-btn.active{background:var(--green);color:white;border-color:var(--green)}
+.pharmacy-group{background:var(--card);border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:16px}
+.pharmacy-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-top:10px}
+.pharmacy-table th{background:var(--green);color:white;padding:10px 8px;font-size:12px;font-weight:800;text-align:center}
+.pharmacy-table td{padding:6px;border-bottom:1px solid #f1f5f9;text-align:center;background:white}
+.table-input{width:100%;padding:8px 6px;border:1px solid var(--border);border-radius:8px;text-align:center;font-size:13px;outline:none;transition:0.2s;background:#f8fafc}
+.table-input:focus{border-color:var(--green);background:white;box-shadow:0 0 0 3px rgba(14,159,110,0.1)}
+.table-input.is-deficit{background:#fee2e2!important;color:#dc2626!important;border-color:#fecaca!important;font-weight:800}
+.table-input.is-increase{background:#dcfce7!important;color:#16a34a!important;border-color:#bbf7d0!important;font-weight:800}
+button{cursor:pointer;transition:0.2s} button:active{transform:scale(0.95)}
