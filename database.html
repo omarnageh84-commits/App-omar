@@ -1,13 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body style="background: transparent; padding: 10px;">
-    <h3>👥 قواعد البيانات</h3>
-    <p>إدارة بيانات العملاء والموردين والصاصة.</p>
-    <!-- حط جدول أو محتوى قواعد البيانات هنا براحتك -->
-</body>
-</html>
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"></head><body>
+<h3>قواعد البيانات</h3>
+<h4>الموظفين (اكتب الوقت 7 او 19)</h4><table class="pharmacy-table"><thead><tr><th>الاسم</th><th>الوظيفة</th><th>حضور</th><th>انصراف</th><th>اول يوم</th><th>اخر يوم</th><th>X</th></tr></thead><tbody id="employeeTableBody"><tr><td><input class="table-input" value="احمد"></td><td><input class="table-input"></td><td><input class="table-input" value="8"></td><td><input class="table-input" value="19"></td><td><input class="table-input" value="1/7"></td><td><input class="table-input"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr></tbody></table><button onclick="addEmployeeRow()">+ موظف</button>
+<h4>الموردين</h4><table class="pharmacy-table"><thead><tr><th>الاسم</th><th>البيان</th><th>X</th></tr></thead><tbody id="supplierTableBody"><tr><td><input class="table-input" value="المتحدة"></td><td><input class="table-input"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr></tbody></table><button onclick="addSupplierRow()">+ مورد</button>
+<h4>البيان</h4><table class="pharmacy-table"><thead><tr><th>النوع</th><th>X</th></tr></thead><tbody id="bayanTableBody"><tr><td><input class="table-input" value="فاتورة"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr><tr><td><input class="table-input" value="مرتجع"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr><tr><td><input class="table-input" value="اشعار"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr></tbody></table><button onclick="addBayanRow()">+ بيان</button>
+<script src="script.js"></script></body></html>
