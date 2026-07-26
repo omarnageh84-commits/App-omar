@@ -1,67 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>إدارة عمر</title>
-<link rel="stylesheet" href="style.css">
-<style>
-.tabs-header{display:flex;gap:10px;background:#f1f5f9;padding:10px;border-radius:12px;margin:10px}
-.tab-btn{flex:1;padding:12px;border:none;border-radius:8px;font-weight:800;cursor:pointer;background:#e2e8f0}
-.tab-btn.active{background:#0e9f6e;color:white}
-.tab-content{display:none} .tab-content.active-content{display:block}
-.sub-tabs-header{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
-.sub-tab-btn{padding:8px 14px;border:1px solid #e2e8f0;border-radius:6px;background:white;cursor:pointer}
-.sub-tab-btn.active{background:#0e9f6e;color:white}
-.table-input.is-deficit{background:#fee2e2!important;color:#dc2626!important;font-weight:800!important}
-.table-input.is-increase{background:#dcfce7!important;color:#16a34a!important;font-weight:800!important}
-</style>
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>إدارة عمر - النسخة الاحترافية</title><link rel="stylesheet" href="style.css"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet"></head>
 <body>
-<div class="app-container" style="max-width:1200px;margin:auto;padding:10px">
-<!-- التابين الرئيسيين اللي بتسأل عليهم -->
+<div class="app-container">
 <div class="tabs-header">
-<button class="tab-btn active" onclick="openTab(event,'pharmacyTab')">💊 الصيدليه</button>
+<button class="tab-btn active" onclick="openTab(event,'pharmacyTab')">💊 الصيدلية</button>
 <button class="tab-btn" onclick="openTab(event,'privateTab')">🔒 الخاص</button>
 </div>
 
 <div id="pharmacyTab" class="tab-content active-content">
 <div class="sub-tabs-header">
-<button class="sub-tab-btn active" onclick="openSubTab(event,'dailySection','pharmacy-group')">اليومية</button>
-<button class="sub-tab-btn" onclick="openSubTab(event,'purchasesSection','pharmacy-group')">المشتريات</button>
-<button class="sub-tab-btn" onclick="openSubTab(event,'totalsSection','pharmacy-group')">الإجمالي</button>
-<button class="sub-tab-btn" onclick="openSubTab(event,'databaseSection','pharmacy-group')">قواعد البيانات</button>
+<button class="sub-tab-btn active" onclick="openSubTab(event,'dailySection','pharmacy-group')">📅 اليومية</button>
+<button class="sub-tab-btn" onclick="openSubTab(event,'purchasesSection','pharmacy-group')">📦 المشتريات</button>
+<button class="sub-tab-btn" onclick="openSubTab(event,'totalsSection','pharmacy-group')">📊 الإجمالي</button>
+<button class="sub-tab-btn" onclick="openSubTab(event,'databaseSection','pharmacy-group')">⚙️ قواعد البيانات</button>
 </div>
 
-<!-- اليومية -->
 <div id="dailySection" class="pharmacy-group">
-<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e2e8f0;margin-bottom:10px">
-<label>📅 تاريخ اليومية:</label><input type="date" id="dailyMainDate" class="table-input"><span id="dayNameDisplay" style="color:#0e9f6e;font-weight:bold"></span>
-</div>
-<table class="pharmacy-table"><thead><tr><th>الموظف</th><th>القيمة</th><th>العجز/زيادة</th><th>المورد</th><th>القيمة</th><th>ملاحظات</th><th>حذف</th></tr></thead><tbody id="dailyTableBody"><tr><td><select class="table-input employee-dropdown"><option>اختر الموظف</option></select></td><td><input class="table-input" value="0"></td><td><input class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option>اختر المورد</option></select></td><td><input class="table-input" value="0"></td><td><input class="table-input"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr></tbody></table>
-<button onclick="addDailyRow()" style="margin:8px 0;background:#0e9f6e;color:white;padding:6px 12px;border:none;border-radius:6px">+ صف</button>
-<div style="display:flex;gap:20px;flex-wrap:wrap"><table class="pharmacy-table" style="flex:1"><thead><tr><th colspan="3">فودافون كاش</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="vodafoneTableBody"><tr><td><input class="table-input calc-input" data-type="system" value="0"></td><td><input class="table-input calc-input" data-type="actual" value="0"></td><td><input class="table-input" data-type="diff" value="0" readonly></td></tr></tbody></table><table class="pharmacy-table" style="flex:1"><thead><tr><th colspan="3">إنستا</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="instaTableBody"><tr><td><input class="table-input calc-input" data-type="system" value="0"></td><td><input class="table-input calc-input" data-type="actual" value="0"></td><td><input class="table-input" data-type="diff" value="0" readonly></td></tr></tbody></table></div>
-<div style="margin-top:10px"><button onclick="saveDaily()" style="background:#0e9f6e;color:white;padding:8px 16px;border:none;border-radius:6px">💾 حفظ</button> <button onclick="resetDaily()" style="background:#ef4444;color:white;padding:8px 16px;border:none;border-radius:6px">♻️ تهيئة</button></div>
-</div>
-
-<!-- المشتريات -->
-<div id="purchasesSection" class="pharmacy-group" style="display:none">
-<h3>📦 المشتريات</h3>
-<table class="pharmacy-table"><thead><tr><th>التاريخ</th><th>المورد</th><th>البيان</th><th>القيمة</th><th>ملاحظات</th><th>حذف</th></tr></thead><tbody id="purchaseTableBody"><tr><td><input class="table-input" value="01/07/2026"></td><td><select class="table-input supplier-dropdown"></select></td><td><select class="table-input bayan-dropdown"></select></td><td><input class="table-input" value="0"></td><td><input class="table-input"></td><td><button onclick="this.closest('tr').remove();updatePurchaseSummaries()">X</button></td></tr></tbody></table>
-<button onclick="addPurchaseRow()">+ إضافة</button>
-<h4>📅 التجميع اليومي</h4><table class="pharmacy-table"><thead><tr><th>التاريخ</th><th>فواتير</th><th>مرتجعات</th><th>اشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="dailySummaryBody"></tbody></table>
-<h4>🏢 بالمورد</h4><table class="pharmacy-table"><thead><tr><th>المورد</th><th>فواتير</th><th>مرتجعات</th><th>اشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="supplierSummaryBody"></tbody></table>
-</div>
-
-<div id="totalsSection" class="pharmacy-group" style="display:none"><h3>الإجمالي</h3><p>هنا الإجمالي هيجي بعدين</p></div>
-<div id="databaseSection" class="pharmacy-group" style="display:none"><h3>قواعد البيانات</h3><table class="pharmacy-table"><thead><tr><th>الموظف</th><th>حضور (7 / 19)</th><th>انصراف</th></tr></thead><tbody id="employeeTableBody"><tr><td><input class="table-input" value="احمد"></td><td><input class="table-input" value="7"></td><td><input class="table-input" value="19"></td></tr></tbody></table><button onclick="addEmployeeRow()">+ موظف</button>
-<table class="pharmacy-table" style="margin-top:15px"><thead><tr><th>المورد</th><th>X</th></tr></thead><tbody id="supplierTableBody"><tr><td><input class="table-input" value="المتحدة"></td><td><button onclick="this.closest('tr').remove()">X</button></td></tr></tbody></table><button onclick="addSupplierRow()">+ مورد</button>
-<table class="pharmacy-table" style="margin-top:15px"><thead><tr><th>البيان</th><th>X</th></tr></thead><tbody id="bayanTableBody"><tr><td><input class="table-input" value="فاتورة"></td><td><button>X</button></td></tr><tr><td><input class="table-input" value="مرتجع"></td><td><button>X</button></td></tr></tbody></table>
-</div>
-</div>
-
-<div id="privateTab" class="tab-content"><h2>🔒 الخاص</h2><p>الجزء الخاص مقفول</p></div>
-</div>
-<script src="script.js"></script>
-</body>
-</html>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px"><h3 style="margin:0">اليومية</h3><div style="display:flex;gap:8px;align-items:center"><input type="date" id="dailyMainDate" class="table-input" style="width:160px"><span id="dayNameDisplay" style="font-weight:800;color:var(--green)"></span></div></div>
+<table class="pharmacy-table"><thead><tr><th>الموظف</th><th>القيمة</th><th>العجز/زيادة</th><th>المورد</th><th>القيمة</th><th>ملاحظات</th><th>حذف</th></tr></thead><tbody id="dailyTableBody"><tr><td><select class="table-input employee-dropdown"><option>اختر الموظف</option></select></td><td><input class="table-input" value="0"></td><td><input class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option>اختر المورد</option></select></td><td><input class="table-input" value="0"></td><td><input class="table-input"></td><td><button style="background:#fee2e2;color:#ef4444;border:none;padding:5px 8px;border-radius:6px" onclick="this.closest('tr').remove()">✕</button></td></tr></tbody></table>
+<button onclick="addDailyRow()" style="margin-top:10px;background:var(--green);color:white;border:none;padding:8px 14px;border-radius:8px;font-weight:700">+ إضافة صف</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px"><div><table class="pharmacy-table"><thead><tr><th colspan="3">💳 فودافون كاش</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="vodafoneTableBody"><tr><td><input class="table-input calc-input" data-type="system" value="0"></td><td><input class="table-input calc-input" data-type="actual" value="0"></td><td><input class="table-input" data-type="diff" value="0" readonly></td></tr></tbody></table></div><div><table class="pharmacy-table"><thead><tr><th colspan="3">🏦 إنستا</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="instaTableBody"><tr><td><input class="table-input calc-input" data-type="system" value="0"></td><td><input class="table-input calc-input" data-type="actual" value="0"></td><td><input class="table-input" data-type="diff" value="0" readonly></td></tr></tbody></table></div></div>
+<div style="margin-top:16px;display:flex;gap:10px"><button onclick="saveDaily()" style="flex:1;background:var(--green);color:white;border:none;padding:12px;border-radius:10px;font-weight:800">💾 حفظ اليوم</button><button onclick="resetDaily()" style="background:#fef2f2;color:#ef4444;border:1px solid #fecaca;padding:12px;border-radius:10px;font-weight:800">♻️ تهي
