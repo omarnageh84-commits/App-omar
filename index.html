@@ -28,11 +28,10 @@
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'pharmacySub4', 'pharmacy-group')">قواعد البيانات</button>
             </div>
 
-            <!-- 1. تبويب اليومية -->
+            <!-- 1. تبويب اليومية (مدخلات حرة) -->
             <div id="pharmacySub1" class="sub-sub-content pharmacy-group active-sub">
                 <h3>📋 سجل اليومية</h3>
                 
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -52,13 +51,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>السبت</td>
-                            <td>أحمد محمد</td>
-                            <td>1200 ج.م</td>
-                            <td>0</td>
-                            <td>شركة المتحدة</td>
-                            <td>1200 ج.م</td>
-                            <td>تم المراجعة</td>
+                            <td><input type="text" class="table-input" value="السبت"></td>
+                            <td><input type="text" class="table-input" value="أحمد محمد"></td>
+                            <td><input type="text" class="table-input" value="1200"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="شركة المتحدة"></td>
+                            <td><input type="text" class="table-input" value="1200"></td>
+                            <td><input type="text" class="table-input" value="تم المراجعة"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -70,7 +69,11 @@
                             <tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>0</td><td>0</td><td>0</td></tr>
+                            <tr>
+                                <td><input type="text" class="table-input" value="0"></td>
+                                <td><input type="text" class="table-input" value="0"></td>
+                                <td><input type="text" class="table-input" value="0"></td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -80,7 +83,11 @@
                             <tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>0</td><td>0</td><td>0</td></tr>
+                            <tr>
+                                <td><input type="text" class="table-input" value="0"></td>
+                                <td><input type="text" class="table-input" value="0"></td>
+                                <td><input type="text" class="table-input" value="0"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -91,7 +98,6 @@
                 <h3>📦 سجل المشتريات والمرتجعات</h3>
                 <p>متابعة الفواتير والمرتجعات والموردين.</p>
 
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -109,11 +115,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1/7/2026</td>
-                            <td>شركة الفيروز</td>
-                            <td>فاتورة</td>
-                            <td>1500 ج.م</td>
-                            <td>تم الاستلام كاملة</td>
+                            <td><input type="text" class="table-input" value="1/7/2026"></td>
+                            <td><input type="text" class="table-input" value="شركة الفيروز"></td>
+                            <td><input type="text" class="table-input" value="فاتورة"></td>
+                            <td><input type="text" class="table-input" value="1500"></td>
+                            <td><input type="text" class="table-input" value="تم الاستلام كاملة"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -124,7 +130,6 @@
                 <h3>💰 تقرير الإجمالي اليومي</h3>
                 <p>متابعة إجماليات اليوم بناءً على حركة الشفتات والخدمات.</p>
 
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -144,7 +149,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
+                            <td><input type="text" class="table-input" value="0"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -155,7 +166,6 @@
                 <h3>👥 قواعد البيانات</h3>
                 <p>إدارة بيانات الموظفين، الموردين، والأنواع.</p>
 
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -177,12 +187,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>أحمد محمد</td>
-                                <td>مساعد صيدلي</td>
-                                <td>08:00 ص</td>
-                                <td>04:00 م</td>
-                                <td>01/07/2026</td>
-                                <td>—</td>
+                                <td><input type="text" class="table-input" value="أحمد محمد"></td>
+                                <td><input type="text" class="table-input" value="مساعد صيدلي"></td>
+                                <td><input type="text" class="table-input" value="08:00 ص"></td>
+                                <td><input type="text" class="table-input" value="04:00 م"></td>
+                                <td><input type="text" class="table-input" value="01/07/2026"></td>
+                                <td><input type="text" class="table-input" value="—"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -201,12 +211,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>شركة المتحدة</td>
-                                    <td>أدوية ومستلزمات</td>
+                                    <td><input type="text" class="table-input" value="شركة المتحدة"></td>
+                                    <td><input type="text" class="table-input" value="أدوية ومستلزمات"></td>
                                 </tr>
                                 <tr>
-                                    <td>شركة الفيروز</td>
-                                    <td>أدوية بشرية</td>
+                                    <td><input type="text" class="table-input" value="شركة الفيروز"></td>
+                                    <td><input type="text" class="table-input" value="أدوية بشرية"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -221,11 +231,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td>فاتورة</td></tr>
-                                <tr><td>مرتجع</td></tr>
-                                <tr><td>مشتريات</td></tr>
-                                <tr><td>مردود</td></tr>
-                                <tr><td>مبيعات</td></tr>
+                                <tr><td><input type="text" class="table-input" value="فاتورة"></td></tr>
+                                <tr><td><input type="text" class="table-input" value="مرتجع"></td></tr>
+                                <tr><td><input type="text" class="table-input" value="مشتريات"></td></tr>
+                                <tr><td><input type="text" class="table-input" value="مردود"></td></tr>
+                                <tr><td><input type="text" class="table-input" value="مبيعات"></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -245,7 +255,6 @@
 
             <div id="privateSub1" class="sub-sub-content private-group active-sub">
                 <h3>🔒 محتوى المصاريف</h3>
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -254,7 +263,6 @@
 
             <div id="privateSub2" class="sub-sub-content private-group">
                 <h3>🔒 محتوى الديون</h3>
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -263,9 +271,9 @@
 
             <!-- 3. تبويب الحضور والانصراف (الخاص) -->
             <div id="privateSub3" class="sub-sub-content private-group">
-               
+                <h3>🔒 سجل الحضور والانصراف الشهري</h3>
+                <p>متابعة أيام الشهر، أوقات الحضور والانصراف، وحساب الساعات تلقائياً.</p>
 
-                <!-- شريط الأدوات الصغير -->
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
@@ -282,14 +290,13 @@
                         </tr>
                     </thead>
                     <tbody id="attendanceTableBody">
-                        <!-- الأيام هتتولد تلقائي هنا بالجافاسكريبت -->
+                        <!-- الأيام تتولد تلقائي -->
                     </tbody>
                 </table>
             </div>
 
             <div id="privateSub4" class="sub-sub-content private-group">
-                <h3>🔒 محتوى ملاحظاتي</h3>
-                <!-- شريط الأدوات الصغير -->
+                <h3>🔒 ملاحظاتي</h3>
                 <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px;">
                     <span class="syncStatus" style="color: #666; font-size: 11px;">🟢 متصل بالشيت</span>
                     <button type="button" onclick="manualSaveData()" style="padding: 3px 8px; font-size: 11px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">حفظ يدوي</button>
