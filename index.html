@@ -1,29 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدارة عمر</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .table-input.is-deficit {
-            background: #fee2e2 !important;
-            color: #dc2626 !important;
-            border: 1px solid #fecaca !important;
-            font-weight: 800 !important;
-        }
-
-        .table-input.is-increase {
-            background: #dcfce7 !important;
-            color: #16a34a !important;
-            border: 1px solid #bbf7d0 !important;
-            font-weight: 800 !important;
-        }
+       .table-input.is-deficit { background: #fee2e2!important; color: #dc2626!important; border: 1px solid #fecaca!important; font-weight: 800!important; }
+       .table-input.is-increase { background: #dcfce7!important; color: #16a34a!important; border: 1px solid #bbf7d0!important; font-weight: 800!important; }
     </style>
 </head>
-
 <body>
     <div class="app-container">
         <div class="tabs-header">
@@ -32,459 +18,75 @@
         </div>
         <div id="pharmacyTab" class="tab-content active-content">
             <div class="sub-tabs-header">
-                <button class="sub-tab-btn active"
-                    onclick="openSubTab(event, 'pharmacySub1', 'pharmacy-group')">اليومية</button>
-                <button class="sub-tab-btn"
-                    onclick="openSubTab(event, 'pharmacySub2', 'pharmacy-group')">المشتريات</button>
-                <button class="sub-tab-btn"
-                    onclick="openSubTab(event, 'pharmacySub3', 'pharmacy-group')">الاجمالي</button>
-                <button class="sub-tab-btn" onclick="openSubTab(event, 'pharmacySub4', 'pharmacy-group')">قواعد
-                    البيانات</button>
+                <button class="sub-tab-btn active" onclick="openSubTab(event, 'pharmacySub1', 'pharmacy-group')">اليومية</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'pharmacySub2', 'pharmacy-group')">المشتريات</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'pharmacySub3', 'pharmacy-group')">الاجمالي</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'pharmacySub4', 'pharmacy-group')">قواعد البيانات</button>
             </div>
 
             <div id="pharmacySub1" class="sub-sub-content pharmacy-group active-sub">
-                <div
-                    style="display:flex; align-items:center; gap:10px; background:#f8fafc; padding:10px 12px; border-radius:8px; margin-bottom:12px; border:1px solid #e2e8f0;">
+                <div style="display:flex; align-items:center; gap:10px; background:#f8fafc; padding:10px 12px; border-radius:8px; margin-bottom:12px; border:1px solid #e2e8f0;">
                     <label style="font-weight:700; font-size:14px;">📅 تاريخ اليومية:</label>
-                    <input type="date" id="dailyMainDate" class="table-input"
-                        style="max-width:200px; background:white;">
-                    <span id="dayNameDisplay"
-                        style="font-size:13px; color:#0e9f6e; font-weight:bold; margin-right:auto;"></span>
+                    <input type="date" id="dailyMainDate" class="table-input" style="max-width:200px; background:white;">
+                    <span id="dayNameDisplay" style="font-size:13px; color:#0e9f6e; font-weight:bold; margin-right:auto;"></span>
                 </div>
                 <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>اسم الموظف</th>
-                            <th>القيمة</th>
-                            <th>العجز / الزيادة</th>
-                            <th>اسم المورد</th>
-                            <th>القيمة</th>
-                            <th>ملاحظات</th>
-                            <th>حذف</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>اسم الموظف</th><th>القيمة</th><th>العجز / الزيادة</th><th>اسم المورد</th><th>القيمة</th><th>ملاحظات</th><th>حذف</th></tr></thead>
                     <tbody id="dailyTableBody">
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><select class="table-input employee-dropdown">
-                                    <option value="">اختر الموظف</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input deficit-col" value="0"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" placeholder="ملاحظات"></td>
-                            <td><button onclick="this.closest('tr').remove()"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button>
-                            </td>
-                        </tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
+                        <tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:3px 6px;">X</button></td></tr>
                     </tbody>
                 </table>
-                <button onclick="addDailyRow()"
-                    style="margin:10px 0; padding:6px 12px; background:#0e9f6e; color:white; border:none; border-radius:6px;">+
-                    إضافة صف يومية</button>
+                <button onclick="addDailyRow()" style="margin:10px 0; padding:6px 12px; background:#0e9f6e; color:white; border:none; border-radius:6px;">+ إضافة صف يومية</button>
                 <div style="display:flex; gap:20px; margin-top:15px;">
-                    <table class="pharmacy-table">
-                        <thead>
-                            <tr>
-                                <th colspan="3">فودافون كاش</th>
-                            </tr>
-                            <tr>
-                                <th>سيستم</th>
-                                <th>فعلي</th>
-                                <th>الفرق</th>
-                            </tr>
-                        </thead>
-                        <tbody id="vodafoneTableBody">
-                            <tr>
-                                <td><input type="text" class="table-input calc-input" data-group="vodafone"
-                                        data-type="system" value="0"></td>
-                                <td><input type="text" class="table-input calc-input" data-group="vodafone"
-                                        data-type="actual" value="0"></td>
-                                <td><input type="text" class="table-input deficit-col" data-group="vodafone"
-                                        data-type="diff" value="0" readonly style="background:#f1f5f9;"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="pharmacy-table">
-                        <thead>
-                            <tr>
-                                <th colspan="3">إنستا</th>
-                            </tr>
-                            <tr>
-                                <th>سيستم</th>
-                                <th>فعلي</th>
-                                <th>الفرق</th>
-                            </tr>
-                        </thead>
-                        <tbody id="instaTableBody">
-                            <tr>
-                                <td><input type="text" class="table-input calc-input" data-group="insta"
-                                        data-type="system" value="0"></td>
-                                <td><input type="text" class="table-input calc-input" data-group="insta"
-                                        data-type="actual" value="0"></td>
-                                <td><input type="text" class="table-input deficit-col" data-group="insta"
-                                        data-type="diff" value="0" readonly style="background:#f1f5f9;"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <table class="pharmacy-table"><thead><tr><th colspan="3">فودافون كاش</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="vodafoneTableBody"><tr><td><input type="text" class="table-input calc-input" data-group="vodafone" data-type="system" value="0"></td><td><input type="text" class="table-input calc-input" data-group="vodafone" data-type="actual" value="0"></td><td><input type="text" class="table-input deficit-col" data-group="vodafone" data-type="diff" value="0" readonly style="background:#f1f5f9;"></td></tr></tbody></table>
+                    <table class="pharmacy-table"><thead><tr><th colspan="3">إنستا</th></tr><tr><th>سيستم</th><th>فعلي</th><th>الفرق</th></tr></thead><tbody id="instaTableBody"><tr><td><input type="text" class="table-input calc-input" data-group="insta" data-type="system" value="0"></td><td><input type="text" class="table-input calc-input" data-group="insta" data-type="actual" value="0"></td><td><input type="text" class="table-input deficit-col" data-group="insta" data-type="diff" value="0" readonly style="background:#f1f5f9;"></td></tr></tbody></table>
                 </div>
                 <div style="display:flex; gap:10px; margin-top:15px;">
-                    <button onclick="saveDaily()"
-                        style="padding:8px 16px; background:#0e9f6e; color:white; border:none; border-radius:6px; font-weight:700; cursor:pointer;">💾
-                        حفظ اليوم</button>
-                    <button onclick="resetDaily()"
-                        style="padding:8px 16px; background:#ef4444; color:white; border:none; border-radius:6px; font-weight:700; cursor:pointer;">♻️
-                        اعادة تهيئة</button>
+                    <button onclick="saveDaily()" style="padding:8px 16px; background:#0e9f6e; color:white; border:none; border-radius:6px; font-weight:700; cursor:pointer;">💾 حفظ اليوم</button>
+                    <button onclick="resetDaily()" style="padding:8px 16px; background:#ef4444; color:white; border:none; border-radius:6px; font-weight:700; cursor:pointer;">♻️ اعادة تهيئة</button>
                 </div>
             </div>
 
             <div id="pharmacySub2" class="sub-sub-content pharmacy-group">
-                <div
-                    style="display:flex; align-items:center; gap:10px; background:#f8fafc; padding:10px 12px; border-radius:8px; margin-bottom:12px; border:1px solid #e2e8f0; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:10px; background:#f8fafc; padding:10px 12px; border-radius:8px; margin-bottom:12px; border:1px solid #e2e8f0; flex-wrap:wrap;">
                     <h3 style="margin:0;">📦 سجل المشتريات</h3>
                     <div style="display:flex; align-items:center; gap:8px; margin-right:auto;">
-                        <label style="font-size:13px; font-weight:700;">من:</label><input type="date"
-                            id="purchaseStartDate" class="table-input" style="max-width:150px; background:white;">
-                        <label style="font-size:13px; font-weight:700;">إلى:</label><input type="date"
-                            id="purchaseEndDate" class="table-input" style="max-width:150px; background:white;">
-                        <button onclick="clearPurchaseFilter()"
-                            style="padding:5px 10px; background:#64748b; color:white; border:none; border-radius:5px; font-size:12px;">مسح</button>
+                        <label style="font-size:13px; font-weight:700;">من:</label><input type="date" id="purchaseStartDate" class="table-input" style="max-width:150px; background:white;">
+                        <label style="font-size:13px; font-weight:700;">إلى:</label><input type="date" id="purchaseEndDate" class="table-input" style="max-width:150px; background:white;">
+                        <button onclick="clearPurchaseFilter()" style="padding:5px 10px; background:#64748b; color:white; border:none; border-radius:5px; font-size:12px;">مسح</button>
                     </div>
-                </div>
-                <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>التاريخ</th>
-                            <th>اسم المورد</th>
-                            <th>البيان</th>
-                            <th>القيمة</th>
-                            <th>ملاحظات</th>
-                            <th>حذف</th>
-                        </tr>
-                    </thead>
-                    <tbody id="purchaseTableBody">
-                        <tr>
-                            <td><input type="text" class="table-input" value="01/07/2026"></td>
-                            <td><select class="table-input supplier-dropdown">
-                                    <option value="">اختر المورد</option>
-                                </select></td>
-                            <td><select class="table-input bayan-dropdown">
-                                    <option value="">اختر البيان</option>
-                                </select></td>
-                            <td><input type="text" class="table-input" value="1,500"></td>
-                            <td><input type="text" class="table-input"></td>
-                            <td><button onclick="this.closest('tr').remove(); updatePurchaseSummaries();"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button onclick="addPurchaseRow()"
-                    style="margin:10px 0; padding:6px 12px; background:#0e9f6e; color:white; border:none; border-radius:6px;">+
-                    إضافة مشتريات</button>
+                <table class="pharmacy-table"><thead><tr><th>التاريخ</th><th>اسم المورد</th><th>البيان</th><th>القيمة</th><th>ملاحظات</th><th>حذف</th></tr></thead><tbody id="purchaseTableBody"><tr><td><input type="text" class="table-input" value="01/07/2026"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><select class="table-input bayan-dropdown"><option value="">اختر البيان</option></select></td><td><input type="text" class="table-input" value="1,500"></td><td><input type="text" class="table-input"></td><td><button onclick="this.closest('tr').remove(); updatePurchaseSummaries();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr></tbody></table>
+                <button onclick="addPurchaseRow()" style="margin:10px 0; padding:6px 12px; background:#0e9f6e; color:white; border:none; border-radius:6px;">+ إضافة مشتريات</button>
                 <h4 style="margin-top:25px; background:#e0f2fe; padding:10px; border-radius:6px;">📅 التجميع اليومي</h4>
-                <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>التاريخ</th>
-                            <th>فواتير</th>
-                            <th>مرتجعات</th>
-                            <th>إشعارات</th>
-                            <th>مبيعات</th>
-                            <th>مردود</th>
-                            <th>مدفوع</th>
-                            <th>الصافي</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dailySummaryBody"></tbody>
-                </table>
-                <h4 style="margin-top:25px; background:#fef3c7; padding:10px; border-radius:6px;">🏢 التجميع بالمورد
-                </h4>
-                <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>اسم المورد</th>
-                            <th>فواتير</th>
-                            <th>مرتجعات</th>
-                            <th>إشعارات</th>
-                            <th>مبيعات</th>
-                            <th>مردود</th>
-                            <th>مدفوع</th>
-                            <th>الصافي</th>
-                        </tr>
-                    </thead>
-                    <tbody id="supplierSummaryBody"></tbody>
-                </table>
+                <table class="pharmacy-table"><thead><tr><th>التاريخ</th><th>فواتير</th><th>مرتجعات</th><th>إشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="dailySummaryBody"></tbody></table>
+                <h4 style="margin-top:25px; background:#fef3c7; padding:10px; border-radius:6px;">🏢 التجميع بالمورد</h4>
+                <table class="pharmacy-table"><thead><tr><th>اسم المورد</th><th>فواتير</th><th>مرتجعات</th><th>إشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="supplierSummaryBody"></tbody></table>
             </div>
 
-            <div id="pharmacySub3" class="sub-sub-content pharmacy-group">
-                <h3>💰 تقرير الإجمالي</h3>
-                <table class="pharmacy-table" style="margin-top:15px;">
-                    <thead>
-                        <tr>
-                            <th>إجمالي المبيعات</th>
-                            <th>إجمالي المشتريات</th>
-                            <th>إجمالي المصروفات</th>
-                            <th>إجمالي انستا</th>
-                            <th>إجمالي فودافون</th>
-                            <th>إجمالي الأرباح</th>
-                            <th>الصافي</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                            <td><input type="text" class="table-input" value="0"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div id="pharmacySub3" class="sub-sub-content pharmacy-group"><h3>💰 تقرير الإجمالي</h3><table class="pharmacy-table" style="margin-top:15px;"><thead><tr><th>إجمالي المبيعات</th><th>إجمالي المشتريات</th><th>إجمالي المصروفات</th><th>إجمالي انستا</th><th>إجمالي فودافون</th><th>إجمالي الأرباح</th><th>الصافي</th></tr></thead><tbody><tr><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" value="0"></td></tr></tbody></table></div>
 
             <div id="pharmacySub4" class="sub-sub-content pharmacy-group">
                 <h3>👥 قواعد البيانات</h3>
                 <h4>الموظفين</h4>
-                <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>اسم الموظف</th>
-                            <th>الوظيفة</th>
-                            <th>الحضور</th>
-                            <th>الانصراف</th>
-                            <th>أول يوم</th>
-                            <th>آخر يوم</th>
-                            <th>حذف</th>
-                        </tr>
-                    </thead>
-                    <tbody id="employeeTableBody">
-                        <tr>
-                            <td><input type="text" class="table-input" value="أحمد محمد"></td>
-                            <td><input type="text" class="table-input" value="مساعد صيدلي"></td>
-                            <td><input type="text" class="table-input" value="08:00 ص"></td>
-                            <td><input type="text" class="table-input" value="04:00 م"></td>
-                            <td><input type="text" class="table-input" value="01/07/2026"></td>
-                            <td><input type="text" class="table-input" value="—"></td>
-                            <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                    style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button onclick="addEmployeeRow()"
-                    style="margin:8px 0 20px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+
-                    إضافة موظف</button>
-                <div style="display:flex; gap:15px;">
-                    <div style="flex:1;">
-                        <h4>الموردين</h4>
-                        <table class="pharmacy-table">
-                            <thead>
-                                <tr>
-                                    <th>اسم المورد</th>
-                                    <th>البيان</th>
-                                    <th>حذف</th>
-                                </tr>
-                            </thead>
-                            <tbody id="supplierTableBody">
-                                <tr>
-                                    <td><input type="text" class="table-input" value="شركة المتحدة"></td>
-                                    <td><input type="text" class="table-input" value="أدوية ومستلزمات"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="شركة الفيروز"></td>
-                                    <td><input type="text" class="table-input" value="أدوية بشرية"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table><button onclick="addSupplierRow()"
-                            style="margin:8px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+
-                            إضافة مورد</button>
-                    </div>
-                    <div style="flex:1;">
-                        <h4>البيان</h4>
-                        <table class="pharmacy-table">
-                            <thead>
-                                <tr>
-                                    <th>أنواع المعاملات</th>
-                                    <th>حذف</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bayanTableBody">
-                                <tr>
-                                    <td><input type="text" class="table-input" value="فاتورة"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="مرتجع"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="اشعار"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="مبيعات"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="مردود"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="table-input" value="مدفوع"></td>
-                                    <td><button onclick="this.closest('tr').remove(); populateAllDropdowns();"
-                                            style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table><button onclick="addBayanRow()"
-                            style="margin:8px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+
-                            إضافة نوع</button>
-                    </div>
-                </div>
+                <table class="pharmacy-table"><thead><tr><th>اسم الموظف</th><th>الوظيفة</th><th>الحضور</th><th>الانصراف</th><th>أول يوم</th><th>آخر يوم</th><th>حذف</th></tr></thead><tbody id="employeeTableBody"><tr><td><input type="text" class="table-input" value="أحمد محمد"></td><td><input type="text" class="table-input" value="مساعد صيدلي"></td><td><input type="text" class="table-input" value="08:00 ص"></td><td><input type="text" class="table-input" value="04:00 م"></td><td><input type="text" class="table-input" value="01/07/2026"></td><td><input type="text" class="table-input" value="—"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr></tbody></table>
+                <button onclick="addEmployeeRow()" style="margin:8px 0 20px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+ إضافة موظف</button>
+                <div style="display:flex; gap:15px;"><div style="flex:1;"><h4>الموردين</h4><table class="pharmacy-table"><thead><tr><th>اسم المورد</th><th>البيان</th><th>حذف</th></tr></thead><tbody id="supplierTableBody"><tr><td><input type="text" class="table-input" value="شركة المتحدة"></td><td><input type="text" class="table-input" value="أدوية ومستلزمات"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="شركة الفيروز"></td><td><input type="text" class="table-input" value="أدوية بشرية"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr></tbody></table><button onclick="addSupplierRow()" style="margin:8px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+ إضافة مورد</button></div><div style="flex:1;"><h4>البيان</h4><table class="pharmacy-table"><thead><tr><th>أنواع المعاملات</th><th>حذف</th></tr></thead><tbody id="bayanTableBody"><tr><td><input type="text" class="table-input" value="فاتورة"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="مرتجع"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="اشعار"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="مبيعات"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="مردود"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr><tr><td><input type="text" class="table-input" value="مدفوع"></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444; color:white; border:none; border-radius:4px;">X</button></td></tr></tbody></table><button onclick="addBayanRow()" style="margin:8px 0; padding:5px 10px; background:#3b82f6; color:white; border:none; border-radius:5px;">+ إضافة نوع</button></div></div>
             </div>
         </div>
 
         <div id="privateTab" class="tab-content">
-            <div class="sub-tabs-header"><button class="sub-tab-btn active"
-                    onclick="openSubTab(event, 'privateSub1', 'private-group')">المصاريف</button><button
-                    class="sub-tab-btn"
-                    onclick="openSubTab(event, 'privateSub2', 'private-group')">الديون</button><button
-                    class="sub-tab-btn" onclick="openSubTab(event, 'privateSub3', 'private-group')">الحضور
-                    والانصراف</button></div>
-            <div id="privateSub1" class="sub-sub-content private-group active-sub">
-                <h3>🔒 المصاريف</h3>
-            </div>
-            <div id="privateSub2" class="sub-sub-content private-group">
-                <h3>🔒 الديون</h3>
-            </div>
-            <div id="privateSub3" class="sub-sub-content private-group">
-                <h3>🔒 الحضور والانصراف</h3>
-                <table class="pharmacy-table">
-                    <thead>
-                        <tr>
-                            <th>اليوم</th>
-                            <th>حضور</th>
-                            <th>انصراف</th>
-                            <th>ساعات</th>
-                            <th>حذف</th>
-                        </tr>
-                    </thead>
-                    <tbody id="attendanceTableBody"></tbody>
-                </table>
-            </div>
+            <div class="sub-tabs-header"><button class="sub-tab-btn active" onclick="openSubTab(event, 'privateSub1', 'private-group')">المصاريف</button><button class="sub-tab-btn" onclick="openSubTab(event, 'privateSub2', 'private-group')">الديون</button><button class="sub-tab-btn" onclick="openSubTab(event, 'privateSub3', 'private-group')">الحضور والانصراف</button></div>
+            <div id="privateSub1" class="sub-sub-content private-group active-sub"><h3>🔒 المصاريف</h3></div>
+            <div id="privateSub2" class="sub-sub-content private-group"><h3>🔒 الديون</h3></div>
+            <div id="privateSub3" class="sub-sub-content private-group"><h3>🔒 الحضور والانصراف</h3><table class="pharmacy-table"><thead><tr><th>اليوم</th><th>حضور</th><th>انصراف</th><th>ساعات</th><th>حذف</th></tr></thead><tbody id="attendanceTableBody"></tbody></table></div>
         </div>
-        <script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
-
-                          </html>
+</html>
