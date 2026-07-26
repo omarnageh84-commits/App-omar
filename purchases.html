@@ -1,33 +1,9 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body style="background: transparent; padding: 10px;">
-    <h3>📦 سجل المشتريات والمرتجعات</h3>
-    <p>متابعة الفواتير والمرتجعات والموردين.</p>
-
-    <table class="pharmacy-table">
-        <thead>
-            <tr>
-                <th>التاريخ</th>
-                <th>اسم المورد</th>
-                <th>البيان</th>
-                <th>القيمة</th>
-                <th>ملاحظات</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1/7/2026</td>
-                <td>شركة الفيروز</td>
-                <td>فاتورة</td>
-                <td>1500 ج.م</td>
-                <td>تم الاستلام كاملة</td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-</html>
-
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><link rel="stylesheet" href="style.css"></head><body>
+<h3>📦 المشتريات</h3>
+<table class="pharmacy-table"><thead><tr><th>التاريخ (اكتب 1/7)</th><th>المورد</th><th>البيان</th><th>القيمة (10000)</th><th>ملاحظات</th><th>حذف</th></tr></thead><tbody id="purchaseTableBody">
+<tr><td><input class="table-input" value="01/07/2026"></td><td><select class="table-input supplier-dropdown"></select></td><td><select class="table-input bayan-dropdown"></select></td><td><input class="table-input" value="0"></td><td><input class="table-input"></td><td><button onclick="this.closest('tr').remove();updatePurchaseSummaries()">X</button></td></tr>
+</tbody></table>
+<button onclick="addPurchaseRow()">+ إضافة</button>
+<h4>📅 التجميع اليومي</h4><table class="pharmacy-table"><thead><tr><th>التاريخ</th><th>فواتير</th><th>مرتجعات</th><th>اشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="dailySummaryBody"></tbody></table>
+<h4>🏢 بالمورد</h4><table class="pharmacy-table"><thead><tr><th>المورد</th><th>فواتير</th><th>مرتجعات</th><th>اشعارات</th><th>مبيعات</th><th>مردود</th><th>مدفوع</th><th>الصافي</th></tr></thead><tbody id="supplierSummaryBody"></tbody></table>
+<script src="script.js"></script></body></html>
