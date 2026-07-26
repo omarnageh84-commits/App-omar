@@ -1,4 +1,39 @@
-// 1. توليد أيام الشهر تلقائياً لجدول الحضور والانصراف
+// 1. نظام التبويبات الرئيسية والفرعية (عشان تشتغل فوراً)
+function openTab(evt, tabName) {
+    let tabContent = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+        tabContent[i].classList.remove("active-content");
+    }
+    let tabBtns = document.getElementsByClassName("tab-btn");
+    for (let i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove("active");
+    }
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active-content");
+    evt.currentTarget.classList.add("active");
+}
+
+function openSubTab(evt, subTabId, groupClass) {
+    let subContents = document.getElementsByClassName(groupClass);
+    for (let i = 0; i < subContents.length; i++) {
+        subContents[i].style.display = "none";
+        subContents[i].classList.remove("active-sub");
+    }
+    let subBtns = document.querySelectorAll(`.${evt.currentTarget.className.split(' ')[0]}`);
+    // تصحيح أزرار التبويبات الفرعية
+    let parentHeader = evt.currentTarget.parentElement;
+    let allBtns = parentHeader.getElementsByClassName("sub-tab-btn");
+    for (let i = 0; i < allBtns.length; i++) {
+        allBtns[i].classList.remove("active");
+    }
+    
+    document.getElementById(subTabId).style.display = "block";
+    document.getElementById(subTabId).classList.add("active-sub");
+    evt.currentTarget.classList.add("active");
+}
+
+// 2. توليد أيام الشهر تلقائياً لجدول الحضور والانصراف
 document.addEventListener("DOMContentLoaded", function () {
     const tbody = document.getElementById("attendanceTableBody");
     if (tbody) {
@@ -27,23 +62,25 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.innerHTML = html;
     }
 
-    // استرجاع بيانات المشروع كله المحفوظة محلياً
+    // استرجاع بيانات المشروع كله
     let savedData = localStorage.getItem("pharmacy_full_project_data");
     if (savedData) {
-        let data = JSON.parse(savedData);
-        let inputs = document.querySelectorAll("input");
-        inputs.forEach((input, index) => {
-            if (data[index] !== undefined) {
-                input.value = data[index];
-                if(input.classList.contains("time-input")) {
-                    calculateHours(input.closest("tr"));
+        try {
+            let data = JSON.parse(savedData);
+            let inputs = document.querySelectorAll("input, textarea, select");
+            inputs.forEach((input, index) => {
+                if (data[index] !== undefined) {
+                    input.value = data[index];
+                    if(input.classList.contains("time-input")) {
+                        calculateHours(input.closest("tr"));
+                    }
                 }
-            }
-        });
+            });
+        } catch(e) { console.log(e); }
     }
 });
 
-// 2. تنسيق الوقت (7 أو 19)
+// 3. تنسيق الوقت (7 أو 19)
 function formatTimeInput(input) {
     let val = input.value.trim();
     if (!val) return;
@@ -61,7 +98,7 @@ function formatTimeInput(input) {
     autoSaveAllProject();
 }
 
-// 3. حساب فرق الساعات
+// 4. حساب فرق الساعات
 function calculateHours(row) {
     if (!row) return;
     let inputs = row.querySelectorAll(".time-input");
@@ -94,7 +131,7 @@ function calculateHours(row) {
     resultCell.innerText = `${diff} ساعة`;
 }
 
-// 4. الحفظ اللحظي لكل المشروع (أي إدخال أو مسح في أي مكان بيسمع فوراً)
+// 5. الحفظ اللحظي لكل المشروع
 document.addEventListener("input", function (e) {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") {
         autoSaveAllProject();
@@ -109,7 +146,6 @@ function autoSaveAllProject() {
     });
     localStorage.setItem("pharmacy_full_project_data", JSON.stringify(data));
     
-    // مؤشر الحفظ الصغير
     let status = document.getElementById("syncStatus");
     if(status) {
         status.innerText = "🟢 يتم الحفظ...";
@@ -117,13 +153,11 @@ function autoSaveAllProject() {
     }
 }
 
-// 5. زرار الحفظ اليدوي لكل المشروع
 function manualSaveData() {
     autoSaveAllProject();
     alert("تم حفظ بيانات المشروع بالكامل يدوياً بنجاح! 💾");
 }
 
-// 6. زرار إعادة التهيئة لكل المشروع
 function resetPageData() {
     if (confirm("هل أنت متأكد من مسح وإعادة تهيئة بيانات المشروع بالكامل؟")) {
         localStorage.removeItem("pharmacy_full_project_data");
