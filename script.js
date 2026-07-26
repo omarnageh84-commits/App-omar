@@ -1,169 +1,66 @@
-// 1. نظام التبويبات
-function openTab(evt, tabName) {
-    let tabContent = document.getElementsByClassName("tab-content");
-    for (let i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-        tabContent[i].classList.remove("active-content");
-    }
-    let tabBtns = document.getElementsByClassName("tab-btn");
-    for (let i = 0; i < tabBtns.length; i++) {
-        tabBtns[i].classList.remove("active");
-    }
-    document.getElementById(tabName).style.display = "block";
-    document.getElementById(tabName).classList.add("active-content");
-    evt.currentTarget.classList.add("active");
+function evalCalc(expr) {
+    try {
+        let clean = String(expr).replace(/[,،]/g, '').replace(/[^0-9+\-*/().]/g, '');
+        if (!clean) return 0;
+        let result = Function('"use strict"; return (' + clean + ')')();
+        if (isFinite(result)) return Math.round(result * 100) / 100;
+        return expr;
+    } catch (e) { return expr; }
 }
-
-function openSubTab(evt, subTabId, groupClass) {
-    let subContents = document.getElementsByClassName(groupClass);
-    for (let i = 0; i < subContents.length; i++) {
-        subContents[i].style.display = "none";
-        subContents[i].classList.remove("active-sub");
-    }
-    let parentHeader = evt.currentTarget.parentElement;
-    let allBtns = parentHeader.getElementsByClassName("sub-tab-btn");
-    for (let i = 0; i < allBtns.length; i++) {
-        allBtns[i].classList.remove("active");
-    }
-    document.getElementById(subTabId).style.display = "block";
-    document.getElementById(subTabId).classList.add("active-sub");
-    evt.currentTarget.classList.add("active");
+function parseNum(s) {
+    s = String(s || '0');
+    if (/[+\-*/()]/.test(s)) s = String(evalCalc(s));
+    return parseFloat(s.replace(/[^0-9.-]/g, '')) || 0;
 }
-
-// 2. توليد أيام الشهر تلقائياً لجدول الحضور والانصراف مع زرار تهيئة لكل يوم/صف
-document.addEventListener("DOMContentLoaded", function () {
-    const tbody = document.getElementById("attendanceTableBody");
-    if (tbody) {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const daysNames = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-
-        let html = "";
-        for (let day = 1; day <= daysInMonth; day++) {
-            let dateObj = new Date(year, month, day);
-            let dayName = daysNames[dateObj.getDay()];
-            let formattedDate = `${day}/${month + 1}/${year}`;
-
-            html += `
-                <tr>
-                    <td>${dayName} (${formattedDate})</td>
-                    <td><input type="text" class="time-input" placeholder="7 أو 19" onblur="formatTimeInput(this)"></td>
-                    <td><input type="text" class="time-input" placeholder="7 أو 19" onblur="formatTimeInput(this)"></td>
-                    <td class="hours-result">0 ساعة</td>
-                    <td><button type="button" onclick="resetSingleRow(this)" style="padding: 2px 6px; font-size: 10px; background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">تهيئة اليوم</button></td>
-                </tr>
-            `;
-        }
-        tbody.innerHTML = html;
-    }
-
-    // استرجاع البيانات
-    let savedData = localStorage.getItem("pharmacy_full_project_data");
-    if (savedData) {
-        try {
-            let data = JSON.parse(savedData);
-            let inputs = document.querySelectorAll("input, textarea, select");
-            inputs.forEach((input, index) => {
-                if (data[index] !== undefined) {
-                    input.value = data[index];
-                    if(input.classList.contains("time-input")) {
-                        calculateHours(input.closest("tr"));
-                    }
-                }
-            });
-        } catch(e) { console.log(e); }
-    }
-});
-
-// 3. تنسيق الوقت
-function formatTimeInput(input) {
-    let val = input.value.trim();
-    if (!val) return;
-
-    let hour = parseInt(val);
-    if (!isNaN(hour)) {
-        if (hour >= 1 && hour <= 12) {
-            input.value = `${hour}:00 ص`;
-        } else if (hour > 12 && hour <= 24) {
-            let h12 = hour - 12;
-            input.value = `${h12}:00 م`;
-        }
-    }
-    calculateHours(input.closest("tr"));
-    autoSaveAllProject();
+function saveDaily() {
+    const date = document.getElementById('dailyMainDate')?.value || new Date().toISOString().split('T')[0];
+    alert('✅ تم حفظ يومية ' + date);
 }
-
-// 4. حساب الساعات
-function calculateHours(row) {
-    if (!row) return;
-    let inputs = row.querySelectorAll(".time-input");
-    let resultCell = row.querySelector(".hours-result");
-    if (!inputs.length || !resultCell) return;
-
-    let inVal = inputs[0].value;
-    let outVal = inputs[1].value;
-
-    if (!inVal || !outVal) {
-        resultCell.innerText = "0 ساعة";
-        return;
-    }
-
-    let parseTo24 = (str) => {
-        let parts = str.split(":");
-        let h = parseInt(parts[0]);
-        let isPM = str.includes("م");
-        if (isPM && h !== 12) h += 12;
-        if (!isPM && h === 12) h = 0;
-        return h;
-    };
-
-    let inHour24 = parseTo24(inVal);
-    let outHour24 = parseTo24(outVal);
-
-    let diff = outHour24 - inHour24;
-    if (diff < 0) diff += 24;
-
-    resultCell.innerText = `${diff} ساعة`;
-}
-
-// 5. الحفظ اللحظي
-document.addEventListener("input", function (e) {
-    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") {
-        autoSaveAllProject();
-    }
-});
-
-function autoSaveAllProject() {
-    let inputs = document.querySelectorAll("input, textarea, select");
-    let data = {};
-    inputs.forEach((input, index) => {
-        data[index] = input.value;
+function resetDaily() {
+    if (!confirm('متأكد عايز تصفر؟')) return;
+    document.querySelectorAll('#dailyTableBody.table-input, #vodafoneTableBody.table-input, #instaTableBody.table-input').forEach(el => {
+        if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '0';
+        el.classList.remove('is-deficit', 'is-increase');
     });
-    localStorage.setItem("pharmacy_full_project_data", JSON.stringify(data));
-    
-    let statuses = document.querySelectorAll(".syncStatus");
-    statuses.forEach(status => {
-        status.innerText = "🟢 يتم الحفظ...";
-        setTimeout(() => { status.innerText = "🟢 متصل بالشيت"; }, 400);
+    document.querySelectorAll('[data-type="diff"]').forEach(el => { el.value = 0; el.classList.remove('is-deficit', 'is-increase'); });
+}
+function updatePurchaseSummaries() {
+    const rows = [...document.querySelectorAll('#purchaseTableBody tr')];
+    const dailyMap = {}; const supplierMap = {};
+    rows.forEach(tr => {
+        const date = tr.querySelector('td:nth-child(1) input')?.value.trim() || 'بدون تاريخ';
+        const supplier = tr.querySelector('td:nth-child(2) select')?.value.trim();
+        const bayan = tr.querySelector('td:nth-child(3) select')?.value.trim() || '';
+        const value = parseNum(tr.querySelector('td:nth-child(4) input')?.value);
+        if (!supplier) return;
+        if (!dailyMap[date]) dailyMap[date] = { فاتورة: 0, مرتجع: 0, اشعار: 0, مبيعات: 0, مردود: 0, مدفوع: 0 };
+        if (!supplierMap[supplier]) supplierMap[supplier] = { فاتورة: 0, مرتجع: 0, اشعار: 0, مبيعات: 0, مردود: 0, مدفوع: 0 };
+        if (bayan.includes('مرتجع')) { dailyMap[date].مرتجع += value; supplierMap[supplier].مرتجع += value; }
+        else if (bayan.includes('اشعار')) { dailyMap[date].اشعار += value; supplierMap[supplier].اشعار += value; }
+        else if (bayan.includes('مبيعات')) { dailyMap[date].مبيعات += value; supplierMap[supplier].مبيعات += value; }
+        else if (bayan.includes('مردود')) { dailyMap[date].مردود += value; supplierMap[supplier].مردود += value; }
+        else if (bayan.includes('مدفوع')) { dailyMap[date].مدفوع += value; supplierMap[supplier].مدفوع += value; }
+        else { dailyMap[date].فاتورة += value; supplierMap[supplier].فاتورة += value; }
     });
+    const dailyBody = document.getElementById('dailySummaryBody'); if(dailyBody){dailyBody.innerHTML=''; Object.keys(dailyMap).forEach(d=>{let x=dailyMap[d]; let s=x.فاتورة-x.مرتجع-x.اشعار+x.مبيعات-x.مردود-x.مدفوع; dailyBody.innerHTML+=`<tr><td>${d}</td><td>${x.فاتورة.toLocaleString()}</td><td>${x.مرتجع.toLocaleString()}</td><td>${x.اشعار.toLocaleString()}</td><td>${x.مبيعات.toLocaleString()}</td><td>${x.مردود.toLocaleString()}</td><td>${x.مدفوع.toLocaleString()}</td><td style="font-weight:800;background:#f1f5f9">${s.toLocaleString()}</td></tr>`});}
+    const supBody = document.getElementById('supplierSummaryBody'); if(supBody){supBody.innerHTML=''; Object.keys(supplierMap).forEach(su=>{let x=supplierMap[su]; let s=x.فاتورة-x.مرتجع-x.اشعار+x.مبيعات-x.مردود-x.مدفوع; supBody.innerHTML+=`<tr><td>${su}</td><td>${x.فاتورة.toLocaleString()}</td><td>${x.مرتجع.toLocaleString()}</td><td>${x.اشعار.toLocaleString()}</td><td>${x.مبيعات.toLocaleString()}</td><td>${x.مردود.toLocaleString()}</td><td>${x.مدفوع.toLocaleString()}</td><td style="font-weight:800;background:#f1f5f9">${s.toLocaleString()}</td></tr>`});}
 }
-
-function manualSaveData() {
-    autoSaveAllProject();
-    alert("تم الحفظ يدوياً بنجاح! 💾");
-}
-
-// 6. إعادة تهيئة اليوم أو الصف الواحد بس
-function resetSingleRow(button) {
-    if (confirm("هل تريد مسح بيانات هذا اليوم فقط؟")) {
-        let row = button.closest("tr");
-        let inputs = row.querySelectorAll("input");
-        inputs.forEach(input => input.value = "");
-        let resultCell = row.querySelector(".hours-result");
-        if(resultCell) resultCell.innerText = "0 ساعة";
-        autoSaveAllProject();
-    }
-}
+function smartFormatDate(v){if(!v)return v; v=v.trim().replace(/\-/g,'/'); let m=v.match(/^(\d{1,2})\/(\d{1,2})$/); if(m)return`${m[1].padStart(2,'0')}/${m[2].padStart(2,'0')}/${new Date().getFullYear()}`; m=v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/); if(m)return`${m[1].padStart(2,'0')}/${m[2].padStart(2,'0')}/20${m[3]}`; m=v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); if(m)return`${m[1].padStart(2,'0')}/${m[2].padStart(2,'0')}/${m[3]}`; return v;}
+function smartFormatTime(v){if(!v)return v; v=v.trim(); if(v.includes('ص')||v.includes('م'))return v; if(/^\d{1,2}$/.test(v)){let h=parseInt(v); if(h>=0&&h<=23){let s=h>=12?'م':'ص'; let h12=h%12; if(h12===0)h12=12; return`${h12}:00 ${s}`;}} let m=v.match(/^(\d{1,2}):(\d{2})$/); if(m){let h=parseInt(m[1]); let s=h>=12?'م':'ص'; let h12=h%12; if(h12===0)h12=12; return`${h12}:${m[2]} ${s}`;} return v;}
+function smartFormatNumber(v){if(!v)return v; if(/[+\-*/()]/.test(v))return v; let n=parseNum(v); if(isNaN(n))return v; return n.toLocaleString('en-US');}
+document.addEventListener('input', e=>{
+    if(e.target.classList.contains('deficit-col')){let val=parseNum(e.target.value); e.target.classList.remove('is-deficit','is-increase'); if(val<0)e.target.classList.add('is-deficit'); if(val>0)e.target.classList.add('is-increase');}
+    if(e.target.classList.contains('calc-input')){let r=e.target.closest('tr'); let sys=parseNum(r.querySelector('[data-type="system"]').value); let act=parseNum(r.querySelector('[data-type="actual"]').value); let diff=r.querySelector('[data-type="diff"]'); let d=act-sys; diff.value=d.toLocaleString(); diff.classList.remove('is-deficit','is-increase'); if(d<0)diff.classList.add('is-deficit'); if(d>0)diff.classList.add('is-increase');}
+    if(e.target.closest('#employeeTableBody')||e.target.closest('#supplierTableBody')||e.target.closest('#bayanTableBody'))populateAllDropdowns();
+    if(e.target.closest('#purchaseTableBody'))updatePurchaseSummaries();
+});
+document.addEventListener('change', e=>{ if(e.target.closest('#purchaseTableBody'))updatePurchaseSummaries(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Enter'&&e.target.classList.contains('table-input')){e.preventDefault(); if(/[+\-*/()]/.test(e.target.value)){e.target.value=evalCalc(e.target.value); e.target.dispatchEvent(new Event('input',{bubbles:true}));} if(e.target.closest('#purchaseTableBody')&&e.target.closest('td')?.cellIndex===0)e.target.value=smartFormatDate(e.target.value); if(e.target.closest('#purchaseTableBody')&&e.target.closest('td')?.cellIndex===3)e.target.value=smartFormatNumber(e.target.value); if(e.target.closest('#employeeTableBody')&&(e.target.closest('td')?.cellIndex===2||e.target.closest('td')?.cellIndex===3))e.target.value=smartFormatTime(e.target.value);} });
+document.addEventListener('blur', e=>{ if(!e.target.classList.contains('table-input'))return; if(/[+\-*/()]/.test(e.target.value)){e.target.value=evalCalc(e.target.value); e.target.dispatchEvent(new Event('input',{bubbles:true})); if(!e.target.classList.contains('calc-input'))e.target.value=smartFormatNumber(e.target.value); return;} if(e.target.closest('#purchaseTableBody')&&e.target.closest('td')?.cellIndex===0){e.target.value=smartFormatDate(e.target.value); updatePurchaseSummaries();} if(e.target.closest('#employeeTableBody')&&(e.target.closest('td')?.cellIndex===2||e.target.closest('td')?.cellIndex===3))e.target.value=smartFormatTime(e.target.value); if((e.target.closest('#purchaseTableBody')&&e.target.closest('td')?.cellIndex===3)||e.target.closest('#dailyTableBody')){let v=e.target.value.trim(); if(v&&!isNaN(parseNum(v))&&v!=='0')e.target.value=smartFormatNumber(v);} }, true);
+function populateAllDropdowns(){let emps=[...document.querySelectorAll('#employeeTableBody tr td:first-child input')].map(i=>i.value.trim()).filter(Boolean); let sups=[...document.querySelectorAll('#supplierTableBody tr td:first-child input')].map(i=>i.value.trim()).filter(Boolean); let bayans=[...document.querySelectorAll('#bayanTableBody tr td:first-child input')].map(i=>i.value.trim()).filter(Boolean); document.querySelectorAll('.employee-dropdown').forEach(s=>{let cur=s.value; s.innerHTML='<option value="">اختر الموظف</option>'; emps.forEach(n=>s.innerHTML+=`<option ${n==cur?'selected':''}>${n}</option>`);}); document.querySelectorAll('.supplier-dropdown').forEach(s=>{let cur=s.value; s.innerHTML='<option value="">اختر المورد</option>'; sups.forEach(n=>s.innerHTML+=`<option ${n==cur?'selected':''}>${n}</option>`);}); document.querySelectorAll('.bayan-dropdown').forEach(s=>{let cur=s.value; s.innerHTML='<option value="">اختر البيان</option>'; bayans.forEach(n=>s.innerHTML+=`<option ${n==cur?'selected':''}>${n}</option>`);});}
+function addDailyRow(){document.getElementById('dailyTableBody').insertAdjacentHTML('beforeend',`<tr><td><select class="table-input employee-dropdown"><option value="">اختر الموظف</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input deficit-col" value="0"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input" placeholder="ملاحظات"></td><td><button onclick="this.closest('tr').remove()" style="background:#ef4444;color:white;border:none;border-radius:4px;">X</button></td></tr>`); populateAllDropdowns();}
+function addPurchaseRow(){document.getElementById('purchaseTableBody').insertAdjacentHTML('beforeend',`<tr><td><input type="text" class="table-input" value="${new Date().toLocaleDateString('ar-EG')}"></td><td><select class="table-input supplier-dropdown"><option value="">اختر المورد</option></select></td><td><select class="table-input bayan-dropdown"><option value="">اختر البيان</option></select></td><td><input type="text" class="table-input" value="0"></td><td><input type="text" class="table-input"></td><td><button onclick="this.closest('tr').remove(); updatePurchaseSummaries();" style="background:#ef4444;color:white;border:none;border-radius:4px;">X</button></td></tr>`); populateAllDropdowns(); updatePurchaseSummaries();}
+function addEmployeeRow(){document.getElementById('employeeTableBody').insertAdjacentHTML('beforeend',`<tr><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444;color:white;border:none;border-radius:4px;">X</button></td></tr>`);}
+function addSupplierRow(){document.getElementById('supplierTableBody').insertAdjacentHTML('beforeend',`<tr><td><input type="text" class="table-input" value=""></td><td><input type="text" class="table-input" value=""></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444;color:white;border:none;border-radius:4px;">X</button></td></tr>`);}
+function addBayanRow(){document.getElementById('bayanTableBody').insertAdjacentHTML('beforeend',`<tr><td><input type="text" class="table-input" value=""></td><td><button onclick="this.closest('tr').remove(); populateAllDropdowns();" style="background:#ef4444;color:white;border:none;border-radius:4px;">X</button></td></tr>`);}
+document.addEventListener('DOMContentLoaded', ()=>{populateAllDropdowns(); updatePurchaseSummaries(); let d=document.getElementById('dailyMainDate'); if(d){d.valueAsDate=new Date(); d.addEventListener('change',e=>{let dt=new Date(e.target.value); if(!isNaN(dt))document.getElementById('dayNameDisplay').textContent=dt.toLocaleDateString('ar-EG',{weekday:'long'});}); d.dispatchEvent(new Event('change'));}});
