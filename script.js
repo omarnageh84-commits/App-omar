@@ -1,4 +1,4 @@
-// 1. نظام التبويبات الرئيسية والفرعية (عشان تشتغل فوراً)
+// 1. نظام التبويبات
 function openTab(evt, tabName) {
     let tabContent = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContent.length; i++) {
@@ -20,20 +20,17 @@ function openSubTab(evt, subTabId, groupClass) {
         subContents[i].style.display = "none";
         subContents[i].classList.remove("active-sub");
     }
-    let subBtns = document.querySelectorAll(`.${evt.currentTarget.className.split(' ')[0]}`);
-    // تصحيح أزرار التبويبات الفرعية
     let parentHeader = evt.currentTarget.parentElement;
     let allBtns = parentHeader.getElementsByClassName("sub-tab-btn");
     for (let i = 0; i < allBtns.length; i++) {
         allBtns[i].classList.remove("active");
     }
-    
     document.getElementById(subTabId).style.display = "block";
     document.getElementById(subTabId).classList.add("active-sub");
     evt.currentTarget.classList.add("active");
 }
 
-// 2. توليد أيام الشهر تلقائياً لجدول الحضور والانصراف
+// 2. توليد أيام الشهر تلقائياً لجدول الحضور والانصراف مع زرار تهيئة لكل يوم/صف
 document.addEventListener("DOMContentLoaded", function () {
     const tbody = document.getElementById("attendanceTableBody");
     if (tbody) {
@@ -56,13 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td><input type="text" class="time-input" placeholder="7 أو 19" onblur="formatTimeInput(this)"></td>
                     <td><input type="text" class="time-input" placeholder="7 أو 19" onblur="formatTimeInput(this)"></td>
                     <td class="hours-result">0 ساعة</td>
+                    <td><button type="button" onclick="resetSingleRow(this)" style="padding: 2px 6px; font-size: 10px; background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">تهيئة اليوم</button></td>
                 </tr>
             `;
         }
         tbody.innerHTML = html;
     }
 
-    // استرجاع بيانات المشروع كله
+    // استرجاع البيانات
     let savedData = localStorage.getItem("pharmacy_full_project_data");
     if (savedData) {
         try {
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// 3. تنسيق الوقت (7 أو 19)
+// 3. تنسيق الوقت
 function formatTimeInput(input) {
     let val = input.value.trim();
     if (!val) return;
@@ -98,7 +96,7 @@ function formatTimeInput(input) {
     autoSaveAllProject();
 }
 
-// 4. حساب فرق الساعات
+// 4. حساب الساعات
 function calculateHours(row) {
     if (!row) return;
     let inputs = row.querySelectorAll(".time-input");
@@ -131,7 +129,7 @@ function calculateHours(row) {
     resultCell.innerText = `${diff} ساعة`;
 }
 
-// 5. الحفظ اللحظي لكل المشروع
+// 5. الحفظ اللحظي
 document.addEventListener("input", function (e) {
     if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") {
         autoSaveAllProject();
@@ -146,23 +144,26 @@ function autoSaveAllProject() {
     });
     localStorage.setItem("pharmacy_full_project_data", JSON.stringify(data));
     
-    let status = document.getElementById("syncStatus");
-    if(status) {
+    let statuses = document.querySelectorAll(".syncStatus");
+    statuses.forEach(status => {
         status.innerText = "🟢 يتم الحفظ...";
         setTimeout(() => { status.innerText = "🟢 متصل بالشيت"; }, 400);
-    }
+    });
 }
 
 function manualSaveData() {
     autoSaveAllProject();
-    alert("تم حفظ بيانات المشروع بالكامل يدوياً بنجاح! 💾");
+    alert("تم الحفظ يدوياً بنجاح! 💾");
 }
 
-function resetPageData() {
-    if (confirm("هل أنت متأكد من مسح وإعادة تهيئة بيانات المشروع بالكامل؟")) {
-        localStorage.removeItem("pharmacy_full_project_data");
-        let inputs = document.querySelectorAll("input, textarea, select");
+// 6. إعادة تهيئة اليوم أو الصف الواحد بس
+function resetSingleRow(button) {
+    if (confirm("هل تريد مسح بيانات هذا اليوم فقط؟")) {
+        let row = button.closest("tr");
+        let inputs = row.querySelectorAll("input");
         inputs.forEach(input => input.value = "");
-        alert("تمت إعادة تهيئة المشروع بنجاح! 🔄");
+        let resultCell = row.querySelector(".hours-result");
+        if(resultCell) resultCell.innerText = "0 ساعة";
+        autoSaveAllProject();
     }
 }
